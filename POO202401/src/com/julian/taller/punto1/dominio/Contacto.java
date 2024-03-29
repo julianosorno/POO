@@ -1,11 +1,11 @@
 package com.julian.taller.punto1.dominio;
 
-public class contacto {
+public class Contacto {
     private String nombre;
     private String apellido;
     private long celular;
 
-    public contacto(String nombre, String apellido, long celular) {
+    public Contacto(String nombre, String apellido, long celular) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.celular = celular;

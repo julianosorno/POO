@@ -1,13 +1,13 @@
 package com.julian.taller.punto1.app;
 
-import com.julian.taller.punto1.dominio.agenda;
-import com.julian.taller.punto1.dominio.contacto;
+import com.julian.taller.punto1.dominio.Agenda;
+import com.julian.taller.punto1.dominio.Contacto;
 
 import java.util.List;
 
-public class appAgenda {
+public class AppAgenda {
     public static void main(String[] args) {
-        agenda agenda = new agenda();
+        Agenda agenda = new Agenda();
 
         agenda.crearContacto("Pablo", "perez", 30000);
         agenda.crearContacto("Angie", "Pardo", 31000);
@@ -16,13 +16,17 @@ public class appAgenda {
         agenda.crearContacto("CaRiTo", "PeReZ", 34000);
 
         agenda.cambiarCelular(33000, 33333);
-        contacto buscado = agenda.buscar(33333);
+        Contacto buscado = agenda.buscar(33333);
         System.out.println("Por celular: " + buscado.getNombre());
 
-        List<contacto> buscados = agenda.buscarPorApellido("Pardo");
+        List<Contacto> buscados = agenda.buscarPorApellido("PEREZ");
 
         buscados.forEach(c -> System.out.println(c.getNombre() + " " + c.getApellido()));
 
         System.out.println(agenda.getNumeroDeContactos());
+        System.out.println(agenda.getNombreContactos());
+        agenda.ordenar();
+        System.out.println(agenda.getNombreContactos());
+
     }
 }

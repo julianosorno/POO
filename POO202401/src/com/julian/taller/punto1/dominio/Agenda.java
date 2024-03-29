@@ -3,16 +3,16 @@ package com.julian.taller.punto1.dominio;
 import java.util.ArrayList;
 import java.util.List;
 
-public class agenda {
+public class Agenda {
     public static final int CAPACIDAD = 50;
-    private List<contacto> contactos;
+    private List<Contacto> contactos;
 
-    public agenda() {
+    public Agenda() {
         this.contactos = new ArrayList<>();
     }
 
     public void crearContacto(String nombre, String apellido, long celular) {
-        contacto contacto = new contacto(nombre, apellido, celular);
+        Contacto contacto = new Contacto(nombre, apellido, celular);
 
         if (this.contactos.size() < CAPACIDAD) {
             if (this.buscar(celular) == null) {
@@ -36,10 +36,10 @@ public class agenda {
         this.contactos.removeIf(contacto -> contacto.getCelular() == celular);
     }
 
-    public List<contacto> buscar(String nombre) {
-        List<contacto> contactosBuscados = new ArrayList<>();
+    public List<Contacto> buscar(String nombre) {
+        List<Contacto> contactosBuscados = new ArrayList<>();
 
-        for (contacto contacto : this.contactos) {
+        for (Contacto contacto : this.contactos) {
             if (contacto.getNombre().equalsIgnoreCase(nombre)) {
                 contactosBuscados.add(contacto);
             }
@@ -48,12 +48,12 @@ public class agenda {
         return contactosBuscados;
     }
 
-    public List<contacto> buscarPorApellido(String apellido) {
+    public List<Contacto> buscarPorApellido(String apellido) {
         return this.contactos.stream().filter(cc -> cc.getApellido().equalsIgnoreCase(apellido)).toList();
     }
 
-    public contacto buscar(long celular) {
-        contacto contactoBuscado = null;
+    public Contacto buscar(long celular) {
+        Contacto contactoBuscado = null;
 
         for (int i = 0; i < this.contactos.size(); i++) {
             if (this.contactos.get(i).getCelular() == celular) {
@@ -66,18 +66,26 @@ public class agenda {
     }
 
     public void cambiarCelular(long viejoCelular, long nuevoCelular) {
-        contacto contactoACambiar = this.buscar(viejoCelular);
+        Contacto contactoACambiar = this.buscar(viejoCelular);
 
         if (contactoACambiar != null) {
             contactoACambiar.setCelular(nuevoCelular);
         }
     }
 
-    public List<contacto> ordenar() {
-        return null;
+    public List<Contacto> ordenar() {
+        this.contactos.sort((c1, c2) -> c1.getNombre().compareToIgnoreCase(c2.getNombre()));
+        return this.contactos;
     }
 
-    public int getNumeroDeContactos() {
-        return this.contactos.size();
+    public int getNumeroDeContactos() { return this.contactos.size();}
+
+    public List<String> getNombreContactos(){
+        List<String> contactosNombres = new ArrayList<>();
+        for (Contacto contacto : this.contactos){
+            String nombre= contacto.getNombre();
+            contactosNombres.add(nombre);
+        }
+        return contactosNombres;
     }
 }
